@@ -1,0 +1,8 @@
+**#
+**~
+/.idea/*.xml
+/.idea/*.name
+/.idea/artifacts/
+/.idea/libraries/
+**/.gradle/
+**/build/

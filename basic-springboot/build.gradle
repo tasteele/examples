@@ -1,0 +1,35 @@
+group 'tasteele'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
+
+buildscript {
+    ext {
+        spring_boot_version = '1.2.5.RELEASE'
+    }
+
+    repositories {
+        jcenter();
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+    }
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+springBoot {
+    mainClass = "com.tasteele.examples.basicspringboot.Application"
+}
