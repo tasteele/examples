@@ -8,19 +8,17 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.stub;
 import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -54,5 +52,19 @@ public class AdditionControllerTest extends MockMvcTestBase {
 
     }
 
+    @Test
+    public void absolute_shouldReturnPositiveNumber() throws Exception {
+        mockMvc.perform(get("/absolute/3"))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$").value(3));
+    }
 
+    @Test
+    public void absolute_shouldReturnOppositeNegativeNumber() throws Exception {
+        mockMvc.perform(get("/absolute/-3"))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$").value(3));
+    }
 }
